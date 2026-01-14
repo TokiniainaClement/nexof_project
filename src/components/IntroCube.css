@@ -1,0 +1,237 @@
+/* IntroCube.css - Extracted and adapted from cube.html */
+
+/* Removed global body styles to prevent conflicts with app */
+
+.intro-cube-container {
+  width: 100vw;
+  height: 100vh;
+  background: #0a0a0a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: auto; /* Allow scrolling if needed */
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cube-system {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: float 4s ease-in-out infinite, rotate 20s linear infinite;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cube-system:hover {
+  transform: scale(1.05);
+}
+
+.cube {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 150, 255, 0.1);
+  border: 2px solid rgba(0, 255, 255, 0.8);
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+}
+
+.front { transform: rotateY(0deg) translateZ(100px); }
+.back { transform: rotateY(180deg) translateZ(100px); }
+.right { transform: rotateY(90deg) translateZ(100px); }
+.left { transform: rotateY(-90deg) translateZ(100px); }
+.top { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+.wireframe {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.wire {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.6), transparent);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.wire-h { width: 200px; height: 2px; }
+.wire-v { width: 2px; height: 200px; }
+
+.wire1 { transform: translateZ(100px); }
+.wire2 { transform: translateZ(100px) translateY(198px); }
+.wire3 { transform: translateZ(100px) rotateZ(90deg) translateY(-99px) translateX(99px); }
+.wire4 { transform: translateZ(100px) rotateZ(90deg) translateY(-99px) translateX(-99px); }
+
+.wire5 { transform: translateZ(-100px); }
+.wire6 { transform: translateZ(-100px) translateY(198px); }
+.wire7 { transform: translateZ(-100px) rotateZ(90deg) translateY(-99px) translateX(99px); }
+.wire8 { transform: translateZ(-100px) rotateZ(90deg) translateY(-99px) translateX(-99px); }
+
+.wire9 { transform: rotateY(90deg) translateZ(100px); }
+.wire10 { transform: rotateY(90deg) translateZ(100px) translateY(198px); }
+.wire11 { transform: rotateY(90deg) translateZ(-100px); }
+.wire12 { transform: rotateY(90deg) translateZ(-100px) translateY(198px); }
+
+.particles {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  left: -100px;
+  top: -100px;
+  transform-style: preserve-3d;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  animation: orbit 8s linear infinite;
+}
+
+.code-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 255, 255, 0.4);
+  font-size: 8px;
+  line-height: 12px;
+  padding: 10px;
+  overflow: hidden;
+  pointer-events: none;
+  animation: codeFlow 15s linear infinite;
+}
+
+.glow-effect {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: -50px;
+  top: -50px;
+  /* Removed the green glowing circle background */
+  border-radius: 50%;
+  /* Removed animation to prevent any glow effects */
+}
+
+.fragment {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(0, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dissolving {
+  animation: dissolve 3s ease-out forwards;
+}
+
+.fragment.active {
+  animation: fragmentFloat 3s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes rotate {
+  0% { transform: rotateX(15deg) rotateY(0deg); }
+  100% { transform: rotateX(15deg) rotateY(360deg); }
+}
+
+@keyframes orbit {
+  0% { transform: rotateY(0deg) translateX(var(--orbit-radius, 150px)) rotateY(0deg); }
+  100% { transform: rotateY(360deg) translateX(var(--orbit-radius, 150px)) rotateY(-360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes codeFlow {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-100px); }
+}
+
+@keyframes dissolve {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes fragmentFloat {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--random-x, 100px), var(--random-y, -100px)) scale(0);
+  }
+}
+
+.instruction {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(0, 255, 255, 0.6);
+  font-size: 14px;
+  text-align: center;
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@media (max-width: 768px) {
+  .cube-system {
+    width: 150px;
+    height: 150px;
+  }
+
+  .cube, .face {
+    width: 150px;
+    height: 150px;
+  }
+
+  .front, .back, .right, .left, .top, .bottom {
+    transform-origin: center;
+  }
+
+  .front { transform: rotateY(0deg) translateZ(75px); }
+  .back { transform: rotateY(180deg) translateZ(75px); }
+  .right { transform: rotateY(90deg) translateZ(75px); }
+  .left { transform: rotateY(-90deg) translateZ(75px); }
+  .top { transform: rotateX(90deg) translateZ(75px); }
+  .bottom { transform: rotateX(-90deg) translateZ(75px); }
+}

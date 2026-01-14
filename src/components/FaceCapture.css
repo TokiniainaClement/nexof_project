@@ -1,0 +1,220 @@
+/* Variables et styles de base (comme dans LoginForm.css) */
+:root {
+    --neon-blue: #00f0ff;
+    --dark-background: #1a1a1a;
+    --text-color: #e0e0e0;
+    --border-color: #00aaff;
+    --hover-color: #00e0ff;
+    --error-color: #ff4d4d;
+}
+
+.face-capture-container {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px var(--neon-blue);
+    border-radius: 10px;
+    padding: 25px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.face-capture-container h2 {
+    font-size: 1.4em;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+    margin-bottom: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin: 0 auto 20px;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1); /* Pour un effet miroir */
+    object-fit: cover;
+}
+
+/* Cadre néon */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+    border: 3px solid var(--neon-blue);
+    border-radius: 5px;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.scan-message {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.capture-button {
+    background-color: var(--neon-blue);
+    color: var(--dark-background);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+
+.capture-button:hover:not(:disabled) {
+    background-color: var(--hover-color);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+.capture-button:disabled {
+    background-color: #005f6b;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* FaceCapture.css - Ajouts */
+.progress-indicator {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--hover-color));
+    border-radius: 4px;
+    animation: progressAnimation 2s infinite ease-in-out;
+}
+
+@keyframes progressAnimation {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* Styles pour les messages d'état */
+.scan-message {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.capture-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.face-capture-container {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--neon-blue);
+    border-radius: 12px;
+    padding: 15px;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.status-info {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.mode-indicator {
+    color: #888;
+    font-size: 0.8em;
+    display: block;
+    margin-top: 5px;
+}
+
+.video-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.capture-button {
+    background: linear-gradient(135deg, var(--neon-blue), #0099ff);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+.capture-button:not(:disabled):hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.scan-message {
+    font-size: 1.1em;
+    font-weight: 500;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--hover-color));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Animation de pulsation pour le message */
+.scan-message {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Indicateur de statut de la caméra */
+.camera-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+.camera-status.ready {
+    background-color: #00ff00;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    animation: pulse 1s infinite;
+}
